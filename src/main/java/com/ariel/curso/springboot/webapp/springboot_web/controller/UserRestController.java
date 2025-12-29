@@ -1,24 +1,87 @@
 package com.ariel.curso.springboot.webapp.springboot_web.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+/******************************************************************************************
+ * OPCIÓN 1: @RestController + @GetMapping (FORMA MODERNA Y RECOMENDADA)
+ ******************************************************************************************/
+
+// @RestController indica que esta clase es un controlador REST
+// Todas las respuestas se devuelven directamente como JSON
+// Equivale a usar: @Controller + @ResponseBody
 @RestController
+@RequestMapping("/api") // Prefijo común para todas las rutas del controlador
 public class UserRestController {
-    
-    @GetMapping("/details2")
+    // @GetMapping indica que este método responde a una petición HTTP GET
+    // URL final: /api/details
+    @GetMapping( path = "/details" )
     public Map<String, Object> details() {
+        // Se crea un Map para construir la respuesta → Spring lo convertirá automáticamente a JSON
         Map<String, Object> body = new HashMap<>();
-
+        // Datos enviados en la respuesta
         body.put("title", "Hola Mundo Spring Boot");
         body.put("name", "Ariel");
         body.put("lastname", "Paricagua");
+        // Se retorna el Map → Spring lo serializa a JSON
         return body;
     }
-    
-
 }
+/******************************************************************************************
+ * OPCIÓN 2: @Controller + @ResponseBody (FORMA CLÁSICA MVC)
+ ******************************************************************************************/
+
+// @Controller indica que esta clase es un controlador MVC tradicional
+// Por defecto intenta devolver vistas (HTML)
+// @Controller
+// @RequestMapping("/api") // Prefijo común de rutas
+// class UserController {
+//     // @GetMapping define una ruta GET
+//     // URL final: /api/details
+//     @GetMapping("/details")
+//     // @ResponseBody indica que el valor retornado
+//     // NO es una vista, sino datos que deben convertirse a JSON
+//     @ResponseBody
+//     public Map<String, Object> details() {
+//         // Se construye la respuesta en un Map
+//         Map<String, Object> body = new HashMap<>();
+//         // Datos que se enviarán al cliente
+//         body.put("title", "Hola Mundo Spring Boot");
+//         body.put("name", "Ariel");
+//         body.put("lastname", "Paricagua");
+//         // Spring convierte el Map a JSON
+//         return body;
+//     }
+// }
+
+/******************************************************************************************
+ * OPCIÓN 3: @RestController + @RequestMapping (FORMA CLÁSICA REST)
+ ******************************************************************************************/
+
+// @RestController indica que es un controlador REST
+// Devuelve JSON sin necesidad de @ResponseBody
+// @RestController
+// @RequestMapping("/api") // Ruta base del controlador
+// class UserRestController {
+//     // @RequestMapping permite definir la ruta y el método HTTP
+//     // path = "/details" → URL final: /api/details
+//     // method = RequestMethod.GET → solo acepta peticiones GET
+//     @RequestMapping(path = "/details", method = RequestMethod.GET)
+//     public Map<String, Object> details() {
+//         // Se crea el Map que contendrá la respuesta
+//         Map<String, Object> body = new HashMap<>();
+//         // Información retornada al cliente
+//         body.put("title", "Hola Mundo Spring Boot");
+//         body.put("name", "Ariel");
+//         body.put("lastname", "Paricagua");
+//         // Se devuelve el Map convertido automáticamente a JSON
+//         return body;
+//     }
+// }
