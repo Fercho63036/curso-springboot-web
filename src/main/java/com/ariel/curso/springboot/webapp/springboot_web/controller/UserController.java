@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.servlet.ModelAndView;
 
+import com.ariel.curso.springboot.webapp.springboot_web.models.User;
+
 @Controller
 public class UserController {
 
@@ -19,9 +21,9 @@ public class UserController {
     // Sintaxis limpia y específica para Spring MVC
     @GetMapping("/details")
     public String details(Model model) {
+        User user = new User("Ariel",  "Paricagua");
         model.addAttribute("title", "Hola Mundo Spring Boot");
-        model.addAttribute("name", "Ariel");
-        model.addAttribute("lastname", "Paricagua");
+        model.addAttribute("user", user);
         return "details";
     }
 

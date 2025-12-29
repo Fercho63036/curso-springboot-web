@@ -10,27 +10,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ariel.curso.springboot.webapp.springboot_web.models.User;
+
 /******************************************************************************************
  * OPCIÓN 1: @RestController + @GetMapping (FORMA MODERNA Y RECOMENDADA)
  ******************************************************************************************/
 
-// @RestController indica que esta clase es un controlador REST
-// Todas las respuestas se devuelven directamente como JSON
-// Equivale a usar: @Controller + @ResponseBody
 @RestController
-@RequestMapping("/api") // Prefijo común para todas las rutas del controlador
+@RequestMapping("/api")
 public class UserRestController {
-    // @GetMapping indica que este método responde a una petición HTTP GET
-    // URL final: /api/details
     @GetMapping( path = "/details" )
     public Map<String, Object> details() {
-        // Se crea un Map para construir la respuesta → Spring lo convertirá automáticamente a JSON
+        User user = new User("Ariel",  "Paricagua");
         Map<String, Object> body = new HashMap<>();
-        // Datos enviados en la respuesta
+
         body.put("title", "Hola Mundo Spring Boot");
-        body.put("name", "Ariel");
-        body.put("lastname", "Paricagua");
-        // Se retorna el Map → Spring lo serializa a JSON
+        body.put("user", user);
         return body;
     }
 }
