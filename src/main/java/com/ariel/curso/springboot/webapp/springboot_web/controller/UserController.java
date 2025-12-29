@@ -21,7 +21,7 @@ public class UserController {
     // Sintaxis limpia y específica para Spring MVC
     @GetMapping("/details")
     public String details(Model model) {
-        User user = new User("Ariel",  "Paricagua");
+        User user = new User("Ariel", "Paricagua");
         model.addAttribute("title", "Hola Mundo Spring Boot");
         model.addAttribute("user", user);
         return "details";
@@ -39,4 +39,8 @@ public class UserController {
     //     return "details";
     // }
 
+    // Patron MVC
+    // Modelo => El obejto User
+    // Vista => El archivo details.html
+    // Controlador => Tu metodo details
 }
