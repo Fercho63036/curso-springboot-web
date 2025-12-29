@@ -26,3 +26,6 @@ public class User {
         this.lastname = lastname;
     }
 }
+
+// Un POJO es una clase de Java "pura" que sirve únicamente como un contenedor de datos.
+// En resumen: Es una caja organizada para mover tus datos de un lado a otro en Spring Boot.
