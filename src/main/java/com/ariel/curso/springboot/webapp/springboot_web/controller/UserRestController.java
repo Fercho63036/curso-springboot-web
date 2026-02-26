@@ -3,27 +3,39 @@ package com.ariel.curso.springboot.webapp.springboot_web.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Controller;
+// import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+// import org.springframework.web.bind.annotation.RequestMethod;
+// import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ariel.curso.springboot.webapp.springboot_web.models.User;
 
+// Un servicio RESTful es una API que permite comunicar aplicaciones usando HTTP y siguiendo reglas del estilo REST.
+// GET → Obtener datos
+// POST → Crear
+// PUT → Actualizar
+// DELETE → Eliminar
+
+// JSON en objeto de JS es para compartir informacion al  client3e desde el backend
+
 /******************************************************************************************
  * OPCIÓN 1: @RestController + @GetMapping (FORMA MODERNA Y RECOMENDADA)
  ******************************************************************************************/
-
+// CARACTERISTICAS
+// REST (@RestController)
+// Devuelve el JSON
+// Devuelve objeto directamente
+// Para Apis
 @RestController
 @RequestMapping("/api")
 public class UserRestController {
     @GetMapping( path = "/details" )
     public Map<String, Object> details() {
-        User user = new User("Ariel",  "Paricagua");
+        User user = new User("Ariel",  "Paricagua"); // Creando el objeto y inicializando
         Map<String, Object> body = new HashMap<>();
-
+        // Usamos put para el MAP
         body.put("title", "Hola Mundo Spring Boot");
         body.put("user", user);
         return body;

@@ -8,12 +8,12 @@ public class User {
         this.name = name;
         this.lastname = lastname;
     }
-
+    // Leer es igual a get
     // Siempre usa mayúscula después de get y set
     public String getName(){
         return name;
     }
-
+    // Escribir con a set
     public void setName(String name){
         this.name = name;
     }

@@ -1,5 +1,4 @@
 package com.ariel.curso.springboot.webapp.springboot_web.controller;
-
 /***************************** IMPORTACIONES AGRUPADAS ***********************************/
 // 1. Importaciones de Java estándar (java.*)
 // import java.util.Map;
@@ -9,24 +8,28 @@ import org.springframework.ui.Model;
 // import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.servlet.ModelAndView;
-
 import com.ariel.curso.springboot.webapp.springboot_web.models.User;
 
+// Es la clase que recibe las peticiones HTTP (GET, POST, etc.) y devuelve una respuesta (HTML o JSON).
 @Controller
 public class UserController {
-
     /***************************** OPCIÓN 1: Model (Interface) ***********************************/
     // Es la interfaz más común y recomendada de Spring MVC
     // Permite agregar atributos que estarán disponibles en la vista
     // Sintaxis limpia y específica para Spring MVC
-    @GetMapping("/details")
+    
+    // CARACTERISTICAS
+    // MVC (@Controller)
+    // Devuelve HTML
+    // Usa Model
+    // Para páginas web
+    @GetMapping("/details") // Ruta
     public String details(Model model) {
         User user = new User("Ariel", "Paricagua");
         model.addAttribute("title", "Hola Mundo Spring Boot");
         model.addAttribute("user", user);
         return "details";
     }
-
     /***************************** OPCIÓN 2: Map<String, Object> ***********************************/
     // Es un Map genérico de Java, más flexible pero menos específico
     // Spring automáticamente lo convierte en un modelo
@@ -38,7 +41,6 @@ public class UserController {
     //     model.put("lastname", "Paricagua");
     //     return "details";
     // }
-
     // Patron MVC
     // Modelo => El obejto User
     // Vista => El archivo details.html
