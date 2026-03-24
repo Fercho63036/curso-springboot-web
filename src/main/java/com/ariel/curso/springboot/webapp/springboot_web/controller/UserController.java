@@ -3,11 +3,14 @@ package com.ariel.curso.springboot.webapp.springboot_web.controller;
 // 1. Importaciones de Java estándar (java.*)
 // import java.util.Map;
 // 2. Importaciones de Spring Framework (org.springframework.*)
+// import org.springframework.ui.ModelMap;
+// import org.springframework.web.servlet.ModelAndView;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-// import org.springframework.ui.ModelMap;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.servlet.ModelAndView;
 import com.ariel.curso.springboot.webapp.springboot_web.models.User;
 
 // Es la clase que recibe las peticiones HTTP (GET, POST, etc.) y devuelve una respuesta (HTML o JSON).
@@ -31,6 +34,22 @@ public class UserController {
         model.addAttribute("user", user);
         return "details";
     }
+
+    @GetMapping("/list")
+    public String list(ModelMap model) {
+        List<User> users = Arrays.asList(
+            new User("Pepa", "Gonzales"),
+            new User("Lalo", "Perez", "lalo.perez@gmail.com"),
+            new User("Juanita", "Roe"),
+            new User("Andres", "Doe", "andres.doe@gmail.com"),
+            new User("Ariel", "Paricagua")
+        );
+       
+        model.addAttribute("users", users);
+        model.addAttribute("title", "Lista de Usuarios");
+        return "list";
+    }
+
     /***************************** OPCIÓN 2: Map<String, Object> ***********************************/
     // Es un Map genérico de Java, más flexible pero menos específico
     // Spring automáticamente lo convierte en un modelo
