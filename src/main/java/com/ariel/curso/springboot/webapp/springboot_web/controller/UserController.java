@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import com.ariel.curso.springboot.webapp.springboot_web.models.User;
 
 // Es la clase que recibe las peticiones HTTP (GET, POST, etc.) y devuelve una respuesta (HTML o JSON).
@@ -37,6 +39,14 @@ public class UserController {
 
     @GetMapping("/list")
     public String list(ModelMap model) {
+        model.addAttribute("title", "Lista de Usuarios");
+        return "list";
+    }
+
+    // Ese @ModelAttribute sirve para evitar repetir código,
+    // ya que define datos globales del modelo que estarán disponibles automáticamente en todas las vistas del controlador.
+    @ModelAttribute("users")
+    public List<User> userModel(){
         List<User> users = Arrays.asList(
             new User("Pepa", "Gonzales"),
             new User("Lalo", "Perez", "lalo.perez@gmail.com"),
@@ -44,12 +54,8 @@ public class UserController {
             new User("Andres", "Doe", "andres.doe@gmail.com"),
             new User("Ariel", "Paricagua")
         );
-       
-        model.addAttribute("users", users);
-        model.addAttribute("title", "Lista de Usuarios");
-        return "list";
+        return users;
     }
-
     /***************************** OPCIÓN 2: Map<String, Object> ***********************************/
     // Es un Map genérico de Java, más flexible pero menos específico
     // Spring automáticamente lo convierte en un modelo
