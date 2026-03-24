@@ -1,6 +1,9 @@
 package com.ariel.curso.springboot.webapp.springboot_web.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 // import org.springframework.stereotype.Controller;
@@ -46,12 +49,25 @@ public class UserRestController {
     public Map<String, Object> detailsMap() {
         User user = new User("Ariel",  "Paricagua"); // Creando el objeto y inicializando
         Map<String, Object> body = new HashMap<>();
-        // Usamos put para el MAP
         body.put("title", "Hola Mundo Spring Boot");
         body.put("user", user);
         return body;
     }
 
+    @GetMapping( path = "/list" )
+    public List<User> list() {
+        // Esta la logica del negocio lo manejamos directamente al servicios y al repository
+        User user = new User("Ariel",  "Paricagua");
+        User user2 = new User("John",  "Doe");
+        User user3 = new User("Jane",  "Smith");
+
+        // List<User>  users = new ArrayList<>();
+        List<User> users = Arrays.asList(user, user2, user3); // Forma inmutable y más concisa de crear una lista
+        // users.add(user);
+        // users.add(user2);
+        // users.add(user3);
+        return users;
+    }
 }
 /******************************************************************************************
  * OPCIÓN 2: @Controller + @ResponseBody (FORMA CLÁSICA MVC)
