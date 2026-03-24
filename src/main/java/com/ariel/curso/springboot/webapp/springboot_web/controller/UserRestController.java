@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ariel.curso.springboot.webapp.springboot_web.models.User;
+import com.ariel.curso.springboot.webapp.springboot_web.models.UserDto;
 
 // Un servicio RESTful es una API que permite comunicar aplicaciones usando HTTP y siguiendo reglas del estilo REST.
 // GET → Obtener datos
@@ -31,8 +32,18 @@ import com.ariel.curso.springboot.webapp.springboot_web.models.User;
 @RestController
 @RequestMapping("/api")
 public class UserRestController {
-    @GetMapping( path = "/details" )
-    public Map<String, Object> details() {
+
+    @GetMapping(path="/details")
+    public UserDto details(){
+        User user = new User("Ariel",   "Paricagua");
+        UserDto userDto = new UserDto();
+        userDto.setUser(user);
+        userDto.setTitle("Hola Mundo Spring Boot");
+        return userDto;
+    }
+
+    @GetMapping( path = "/details-map" )
+    public Map<String, Object> detailsMap() {
         User user = new User("Ariel",  "Paricagua"); // Creando el objeto y inicializando
         Map<String, Object> body = new HashMap<>();
         // Usamos put para el MAP
@@ -40,6 +51,7 @@ public class UserRestController {
         body.put("user", user);
         return body;
     }
+
 }
 /******************************************************************************************
  * OPCIÓN 2: @Controller + @ResponseBody (FORMA CLÁSICA MVC)
