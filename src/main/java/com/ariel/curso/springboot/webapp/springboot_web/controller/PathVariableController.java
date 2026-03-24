@@ -21,3 +21,5 @@ public class PathVariableController {
     // @RequestParam: toma datos desde la URL (?param=valor) de forma automática.
     // http://localhost:8080/api/var/baz/hola%20este%20es%20un%20mensaje%20muy%20importante
 }
+
+
