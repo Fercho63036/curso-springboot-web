@@ -1,7 +1,5 @@
 package com.ariel.curso.springboot.webapp.springboot_web.controller;
 
-import javax.swing.Spring;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

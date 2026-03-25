@@ -45,6 +45,9 @@ public class PathVariableController {
     @Value("#{'${config.listOfValues}'.toUpperCase()}")
     private String valueString;
     
+    @Value("#{${config.valuesMap}}")
+    private Map<String, Object> valuesMap; 
+
     // baz → 1 dato → devuelve un objeto (DTO)
     // Toma un valor desde la URL (path), lo convierte en variable y lo retorna en un objeto.
     // http://localhost:8080/api/var/baz/hola%20este%20es%20un%20mensaje%20muy%20importante
@@ -90,6 +93,7 @@ public class PathVariableController {
         // String transformado con SpEL (solo mayúsculas)
         json.put("valueString", valueString);
         // Retorna el Map → Spring automáticamente lo convierte a JSON
+        json.put("valuesMap", valuesMap);
         return json;
     }
         
