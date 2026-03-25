@@ -1,5 +1,4 @@
 package com.ariel.curso.springboot.webapp.springboot_web.controller;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,23 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ariel.curso.springboot.webapp.springboot_web.models.ParamDto;
 import com.ariel.curso.springboot.webapp.springboot_web.models.User;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping("/api/var")
 public class PathVariableController {
-
     // Trae un valor del properties y lo guarda en una variable
     @Value("${config.code}")
     private Integer code;
-
     @Value("${config.username}")
     private String username;
-
     @Value("${config.listOfValues}")
     private String[] listOfValues;
-
     // baz → 1 dato → devuelve un objeto (DTO)
     // Toma un valor desde la URL (path), lo convierte en variable y lo retorna en un objeto.
     // http://localhost:8080/api/var/baz/hola%20este%20es%20un%20mensaje%20muy%20importante
@@ -39,7 +32,6 @@ public class PathVariableController {
         params.setMessage(message);
         return params;
     }
-
     // mix → varios datos → devuelve un JSON (Map)
     // @RequestParam: toma datos desde la URL (?param=valor) de forma automática.
     // Devuelve un JSON armado “a mano” con un Map
