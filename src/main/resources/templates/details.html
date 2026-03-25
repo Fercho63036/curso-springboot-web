@@ -13,16 +13,19 @@
     <h1 th:text="${title}"></h1> 
     <!-- Muestra el título recibido desde el controlador -->
     <ul> <!-- Lista -->
-        <li th:text="${user.name}"></li> 
+        <li th:text="${user.name}"></li>
         <!-- Muestra el nombre del objeto user -->
-        <li th:text="${user.lastname}"></li> 
+        <li th:text="${user.lastname}"></li>
         <!-- Muestra el apellido del objeto user -->
-        <li th:if="${user.email}" th:text="${user.email}"></li> 
+        <li th:if="${user.email}" th:text="${user.email}"></li>
         <!-- Si user.email existe (no null), lo muestra -->
-        <li th:if="${user.email == null}" th:text="'No tiene email'"></li> 
+        <li th:if="${user.email == null}" th:text="${'no tiene email'}"></li>
         <!-- Si email es null, muestra mensaje -->
     </ul>
-    <a th:href="@{/list}">ver listado</a> 
+    <a th:href="@{/list}">ver listado</a><br>
     <!-- th:href genera una URL dinámica hacia /list -->
+    <a th:href="@{/api/params/foo?message=hola que tal festival}">ver mensaje</a>
+    <a th:href="@{/api/params/foo(message='hola que tal festival')}">ver mensaje 2</a>
+    <a th:href="@{/api/params/bar(text='hola que tal festival', 3232323)}">ver bar mix 2</a>
 </body>
 </html> <!-- Fin del documento -->
