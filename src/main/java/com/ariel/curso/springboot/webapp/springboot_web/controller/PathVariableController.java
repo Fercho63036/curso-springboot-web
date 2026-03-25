@@ -3,7 +3,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,7 +54,11 @@ public class PathVariableController {
     private String product; 
 
     @Value("#{${config.valuesMap}.price}")
-    private Long price; 
+    private Long price;
+
+    // Permite leer propiedades dinámicamente en runtime desde application.properties con conversión de tipos
+    @Autowired
+    private Environment environment;
 
     // baz → 1 dato → devuelve un objeto (DTO)
     // Toma un valor desde la URL (path), lo convierte en variable y lo retorna en un objeto.
@@ -85,13 +91,18 @@ public class PathVariableController {
     // Endpoint REST que devuelve los valores del properties en formato JSON
     @GetMapping("/values")
     public Map<String, Object> values(@Value("${config.message}") String message) {
+        // Desde Environment
+        Long code2 = environment.getProperty("config.code", Long.class);
         // Se crea un Map para construir el JSON de respuesta
         Map<String, Object> json = new HashMap<>();
         // Valores inyectados a nivel de clase
         json.put("code", code);
+        json.put("code2", code2); // Conversion de string a numeros
         json.put("username", username);
         // También puedes inyectar directamente en parámetros del método
         json.put("message", message);
+        // Desde Environment
+        json.put("message2", environment.getProperty("config.message"));
         // Lista original desde properties
         json.put("listOfValues", listOfValues);
         // Lista transformada con SpEL (mayúsculas + split)
@@ -100,11 +111,8 @@ public class PathVariableController {
         json.put("valueString", valueString);
         // Retorna el Map → Spring automáticamente lo convierte a JSON
         json.put("valuesMap", valuesMap);
-
         json.put("product", product);
-        
         json.put("price", price);
-
         return json;
     }
         
